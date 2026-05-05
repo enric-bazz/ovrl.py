@@ -202,7 +202,7 @@ def plot_tissue(
     )
 
     if scalebar is not None:
-        _plot_scalebar(ax, **scalebar)
+        _plot_scalebar(ax, dx=ovrlp.gridsize, **scalebar)
 
 
 def _plot_tissue_scatter(ax: Axes, xs, ys, cs, *, title: str | None = None, **kwargs):
@@ -327,7 +327,7 @@ def plot_signal_integrity(
         ax_im.spines[["top", "right"]].set_visible(False)
 
         if scalebar is not None:
-            _plot_scalebar(ax_im, **scalebar)
+            _plot_scalebar(ax_im, dx=ovrlp.gridsize,  **scalebar)
 
         if histogram:
             vals, bins = np.histogram(
@@ -465,6 +465,9 @@ def plot_region_of_interest(
         **roi_scatter_kwargs,
     )
     _mark_roi_center(ax_roi_bottom, x, y, roi)
+
+    # update scalebar dx size
+    scalebar["dx"] = ovrlp.gridsize
 
     if scalebar is not None:
         _plot_scalebar(ax_integrity, **scalebar)
